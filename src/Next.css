@@ -1,0 +1,38 @@
+.next-wrap {
+	width: 100%;
+	padding-top: 50px;
+	margin: 0;
+	background-color: white;
+	height: 100vh;
+	overflow: scroll;
+	padding-bottom: 60px;
+}
+
+.route-ul-wrap {
+	max-width: 900px;
+	margin: 0 auto;
+}
+
+
+.complete-icon {
+	opacity: 0.4;
+}
+
+.end-route {
+	width: 150px;
+	text-align: center;
+	margin: 45px auto 0 auto;
+	display: block;
+}
+
+.route-van-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: centers;
+}
+
+
+.route-ind-items {
+	margin-left: 20px;
+}
+

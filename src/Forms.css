@@ -1,0 +1,80 @@
+.add-new-icon {
+	  width: 30px;
+    height: 30px;
+    line-height: 30px; /* Vertically center text */
+    text-align: center; /* Horizontally center text */
+    border-radius: 50%; /* Make it a circle */
+    margin: 10px 0 0 0;
+    color: white;
+    background-color: #14cc64;
+    display: flex; /* Flexbox centering */
+    justify-content: center; /* Horizontally center content */
+    align-items: center; /* Vertically center content */
+    font-size: 20px;
+}
+
+form {
+	width: 320px;
+	margin: 80px auto 0 auto;
+	background-color: white;
+	padding: 35px;
+	border-radius: 7px;
+	box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.2);
+}
+
+form h1, form p {
+	padding: 0 0 5px 3px;
+	color: #3d3d3d;
+	text-align: center;
+}
+
+form h1 {
+	background-image: linear-gradient(160deg, #0093E9 0%, #80D0C7 75%);
+  -webkit-background-clip: text;  /* For Safari */
+  background-clip: text;          /* For Chrome, Firefox */
+  color: transparent;             /* Makes text transparent so the gradient shows */
+}
+
+form p {
+
+}
+
+input.van-no-input {
+	width: 30%;
+	margin-top: 15px;
+}
+
+input.item-input {
+	width: 100%;
+	margin-top: 20px;
+}
+
+input.van-no-input, input.item-input {
+	border: none;
+	border-bottom: solid 1px #d9d9d9;
+	background-color: transparent;
+	outline: none;
+	color: #3d3d3d;
+	padding: 5px;
+
+}
+
+input.van-no-input:focus, input.item-input:focus {
+  background: transparent;
+}
+
+input.van-no-input::placeholder, input.item-input::placeholder {
+	color: #000;
+	opacity: 0.4;
+}
+
+.add-to-list {
+	width: 100%;	
+}
+
+@media (max-width: 360px) {
+	form {
+		width: 90%;
+		margin: 70px auto 0 auto;
+	}	
+}

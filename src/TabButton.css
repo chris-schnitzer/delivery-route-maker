@@ -1,0 +1,14 @@
+.tab-button {
+	padding: 5px 20px 5px 20px;
+	text-align: center;
+}
+
+.tab-button:not(:last-child) {
+    margin-right: 10px;
+}
+
+.tab-button img {
+	width: 27px;
+	height: 27px;
+	margin-top: 5px;
+}
