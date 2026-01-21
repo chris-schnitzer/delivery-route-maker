@@ -4,8 +4,9 @@ import Landing from './Landing.jsx';
 import Next from './Next';
 import List from './List';
 import AddForm from './AddForm';
+import Collectables from './Collectables';
 
-export default function TabContent({activeTab}) {
+export default function TabContent({ activeTab, setCollectableItems, collectableItems }) {
 	const [showLanding, setShowLanding] = useState(true);
 
 	const handleEnterApp = () => {
@@ -60,10 +61,47 @@ export default function TabContent({activeTab}) {
 		setAllItems([]);
 	}
 
+	
+
 	const handleCompleteTask = (vanId) => {
-		setAllItems((prevVan) => {
-			return prevVan.filter((van) => van.vanId !== vanId);
-		})
+		setAllItems((prevVans) => {
+			return prevVans.filter((van) => {
+				if (van.vanId === vanId) {
+					// Get collectable items (e.g., "box" or "phvr") and add vanNo to each
+					const collectables = van.items
+						.filter((item) => ["box", "bx", "phvr", "ph", "phr", "pet hoover", "pethoover"].includes(item.value.toLowerCase()))
+						.map((item) => ({ 
+							...item, 
+							vanNo: van.vanNo,
+							timeAdded: new Date().toLocaleTimeString([], { 
+								hour: '2-digit', 
+								minute: '2-digit',
+								second: '2-digit' 
+							}),  
+						}));
+
+					if (collectables.length > 0) {
+						// Avoid duplicates: only add new items not already in collectableItems
+						setCollectableItems((prev) => {
+							const newItems = collectables.filter(
+								(item) => !prev.some((existing) => existing.itemId === item.itemId)
+							);
+							return [...prev, ...newItems];
+						});
+					}
+
+					// Always remove the van after completing the task
+					return false;
+				}
+
+				// Keep all other vans
+				return true;
+			});
+		});
+	};
+
+	const handleRemoveCollectable = (itemId) => {
+		setCollectableItems((prevVan) => prevVan.filter((item) => item.itemId !== itemId));
 	}
 
 	
@@ -83,6 +121,11 @@ export default function TabContent({activeTab}) {
    			allItems={allItems}
    			handleEndRoute={handleEndRoute}
    			handleCompleteTask={handleCompleteTask}
+   		/>,
+
+   		Collectables: <Collectables 
+   			collectableItems={collectableItems} 
+   			handleRemoveCollectable={handleRemoveCollectable}
    		/>
     	
     	

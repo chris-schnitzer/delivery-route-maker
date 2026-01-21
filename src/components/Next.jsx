@@ -1,3 +1,5 @@
+// This is the current route(Next.jsx) component.
+
 import vanData from "../vanData.js";
 import "../Next.css";
 
@@ -18,13 +20,13 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
     	return positionA - positionB; // Sort by position in ascending order
   	});
 
-    console.log(allItems);
+
 
     const completeTask = (vanId) => {
         handleCompleteTask(vanId);
     }
 
-  
+    
 
 	return (
 		<div className="next-wrap">

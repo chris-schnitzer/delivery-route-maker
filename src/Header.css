@@ -4,12 +4,33 @@ header {
 	top: 0;
 	background-color: white;
 	box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.1);
-	height: 48px;
 	display: flex;
 	z-index: 101;
+	align-items: center;
+	justify-content: space-between;
 }
-header img {
-	width: 35px;
-	margin: 0 auto;
-	opacity: 0.5;
+.primary-logo {
+	font-size: 25px;
+	margin: 12px 0 12px 25px;
+/*	color: #8b8b8b;*/
+	color: #14abde;
+	opacity: 1;
+	transform: scaleX(-1);
 }
+
+.top-nav-icon {
+	margin-right: 25px;
+	color: #8b8b8b;
+	font-size: 22px;
+	align-items: center;
+	opacity: 0.7;
+}
+
+.info
+ {
+ 	margin-right: 25px;
+}
+
+ .history {
+
+ }

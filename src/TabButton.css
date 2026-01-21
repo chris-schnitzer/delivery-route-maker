@@ -1,5 +1,5 @@
 .tab-button {
-	padding: 5px 20px 5px 20px;
+	padding: 8px 23px 8px 23px;
 	text-align: center;
 }
 
@@ -7,8 +7,20 @@
     margin-right: 10px;
 }
 
-.tab-button img {
-	width: 27px;
-	height: 27px;
+.tab-button {
+	font-size: 20px;
 	margin-top: 5px;
+	color: #8b8b8b;
+}
+
+.active {
+	color: #14abde;
+}
+
+span.tab-alert {
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	border-radius: 10px;
+	background-color: red;
 }

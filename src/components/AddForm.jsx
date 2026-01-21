@@ -1,69 +1,90 @@
-import { useState } from "react";
+import { useForm, useFieldArray } from "react-hook-form";
+import { v4 as uuid } from "uuid";
 import "../Forms.css";
-import { v4 as uuid } from 'uuid';
 
 export default function AddForm({ passFormData }) {
-  const [formData, setFormData] = useState({
-    vanNo: "",
-    vanId: uuid(),
-    items: [{itemId: uuid(), value: ""}], // We will store the items as an array
+  const {
+    register,
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      vanNo: "",
+      items: [{ value: "" }],
+    },
+    mode: "onChange",
   });
 
-  const handleChange = (e, index) => {
-    const { value } = e.target;
-    
-    // Update the specific item value at the given index
-    setFormData((prevData) => {
-      const updatedItems = [...prevData.items];
-      updatedItems[index].value = value;
-      return { ...prevData, items: updatedItems };
-    });
-  };
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "items",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    passFormData(formData);
-    setFormData({vanNo: "", vanId: uuid(), items:[{ itemId: uuid(), value: ""}]});
-  };
-
-  const handleAddInputs = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      items: [...prevData.items, { itemId: uuid(), value: ""}] // Add a new empty item field
-    }));
+  const onSubmit = (data) => {
+    const formWithIds = {
+      ...data,
+      vanId: uuid(),
+      items: data.items.map((item) => ({
+        itemId: uuid(),
+        value: item.value,
+      })),
+    };
+    passFormData(formWithIds);
+    reset({ vanNo: "", items: [{ value: "" }] });
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <h1>Add Items</h1>
-        <p>Select multiple items and proceed to your list.</p>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <p>Select multiple items and proceed to your list.</p>
+      
+        <small className="text-danger">{errors?.vanNo?.message}</small>
+        <br />
         <input
           type="text"
           placeholder="Van No."
-          value={formData.vanNo}
-          onChange={(e) => setFormData({ ...formData, vanNo: e.target.value })}
-          name="vanNo"
+          {...register("vanNo", { required: "Please enter the van no" })}
           className="van-no-input"
         />
-        <br />
-        {formData.items.map((item, index) => (
-          <div key={item.itemId}>
+
+      <br />
+
+      {fields.map((field, index) => (
+        <div className="item-validation-input" key={field.id}>
+          <small className="text-danger">{errors?.items?.[index]?.value?.message}</small>
+          <div className="item-row">
             <input
               type="text"
               placeholder="Item"
-              value={item.value}
-              onChange={(e) => handleChange(e, index)} // Handle change for each item
-              name="items"
+              {...register(`items.${index}.value`, {
+                required: "Please enter an item",
+              })}
               className="item-input"
             />
-          </div>
-        ))}
-        <br />
-        <span onClick={handleAddInputs} className="add-new-icon">+</span>
-        <br />
-        <button className="add-to-list" type="submit">Add items</button>
-      </form>
-    </>
+            {fields.length > 1 && (
+              <span 
+                className="remove-form-item"
+                onClick={(e) => {
+                  e.preventDefault();  
+                  remove(index)}
+                }
+              >
+                -
+              </span>
+            )}
+            </div>
+        </div>
+      ))}
+
+      <br />
+      <span onClick={() => append({ value: "" })} className="add-new-icon">
+        +
+      </span>
+      <br />
+      <button className="add-to-list" type="submit">
+        Add items
+      </button>
+    </form>
   );
 }

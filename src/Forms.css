@@ -15,7 +15,7 @@
 
 form {
 	width: 320px;
-	margin: 80px auto 0 auto;
+	margin: 90px auto 0 auto;
 	background-color: white;
 	padding: 35px;
 	border-radius: 7px;
@@ -36,17 +36,49 @@ form h1 {
 }
 
 form p {
-
+	margin-bottom: 20px;
 }
+
+.text-danger {
+	color: red;
+	margin: 0;
+}
+
 
 input.van-no-input {
 	width: 30%;
-	margin-top: 15px;
+	margin-top: 0;
+}
+
+.item-validation-input {
+	margin: 5px 0;
+}
+
+.item-row {
+	display: flex;
+	align-items: center;
+	gap: 2px;
 }
 
 input.item-input {
 	width: 100%;
-	margin-top: 20px;
+	margin-top: 10px;
+	flex: 1;
+}
+
+.remove-form-item {
+	width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  border: none;
+  background-color: #d9d9d9; 
+  color: white;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 input.van-no-input, input.item-input {
