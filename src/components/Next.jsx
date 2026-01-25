@@ -26,7 +26,14 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
         handleCompleteTask(vanId);
     }
 
-    
+    // defensive wrapper so the button never triggers when disabled
+    const handleEnd = () => {
+        if (endDisabled) return;
+        handleEndRoute();
+    }
+
+    // disable End Route when there are no vans/items
+    const endDisabled = !(Array.isArray(sortedVans) && sortedVans.length > 0);
 
 	return (
 		<div className="next-wrap">
@@ -61,7 +68,13 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
                     )
                 }
             </ul>
-            <button className="end-route" onClick={handleEndRoute}>End Route</button>
+            <button className="end-route" 
+                onClick={handleEnd}
+                disabled={endDisabled}
+                aria-disabled={endDisabled}
+            >
+                End Route
+            </button>
 		</div>
 	)
 }

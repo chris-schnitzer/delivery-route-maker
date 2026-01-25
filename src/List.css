@@ -94,3 +94,9 @@ li {
 	display: block;
 }
 
+.start-route:disabled {
+	opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none; /* optional since disabled already prevents click */
+}
+

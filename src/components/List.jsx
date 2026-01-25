@@ -46,8 +46,12 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 	}
 
 	const startRoute = () => {
+		if (!Array.isArray(items) || items.length === 0) return;
 		handleStartRoute();
 	}
+
+	// disabled when items array is empty or not an array
+	const startDisabled = !(Array.isArray(items) && items.length > 0);
 
 	return (
 		<div id="list-wrap">
@@ -94,7 +98,14 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 						)
 				}
 			</ul>
-			<button className="start-route" onClick={startRoute}>Start route</button> 
+			<button 
+				className="start-route" 
+				onClick={startRoute}
+				disabled={startDisabled}
+				aria-disabled={startDisabled}
+			>
+				Start route
+			</button> 
 		</div>
 	)
 }
