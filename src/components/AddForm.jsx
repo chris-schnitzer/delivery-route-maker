@@ -37,6 +37,7 @@ export default function AddForm({ passFormData }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h1>Add Items</h1>
       <p>Select multiple items and proceed to your list.</p>
       
         <small className="text-danger">{errors?.vanNo?.message}</small>
