@@ -5,21 +5,8 @@ import TabContent from "../components/TabContent.jsx";
 import { FaPlus, FaList, FaLocationDot, FaBusinessTime  } from "react-icons/fa6";
 
 
-export default function TabBar() {
-	//const [collectableItems, setCollectableItems] = useState([]);
-	const [activeTab, setActiveTab] = useState("Add");
+export default function TabBar({ activeTab, setActiveTab, collectableItems, setCollectableItems }) {
 	
-	const [collectableItems, setCollectableItems] = useState(() => {
-	    // Load from localStorage on first render
-	    const saved = localStorage.getItem("collectables");
-	    return saved ? JSON.parse(saved) : [];
-  	});
-
-  	useEffect(() => {
-	    // Save to localStorage whenever items change
-	    localStorage.setItem("collectables", JSON.stringify(collectableItems));
-  	}, [collectableItems]);
-
 	const handleClick = (tabName) => {
 		setActiveTab(tabName);
 	};
@@ -62,7 +49,8 @@ export default function TabBar() {
 		</div>
 		<div>
 			<TabContent 
-				activeTab={activeTab} 
+				activeTab={activeTab}
+				setActiveTab={setActiveTab} 
 				setCollectableItems={setCollectableItems}
 				collectableItems={collectableItems}
 			/>

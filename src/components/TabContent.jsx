@@ -6,7 +6,7 @@ import List from './List';
 import AddForm from './AddForm';
 import Collectables from './Collectables';
 
-export default function TabContent({ activeTab, setCollectableItems, collectableItems }) {
+export default function TabContent({ activeTab, setCollectableItems, collectableItems, setActiveTab }) {
 	const [showLanding, setShowLanding] = useState(true);
 
 	const handleEnterApp = () => {
@@ -55,10 +55,13 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	const handleStartRoute = () => {
 		setAllItems(items);
 		setItems([]);
+		// Switch to the Next tab immediately after starting the route
+    	if (typeof setActiveTab === "function") setActiveTab("Next");
 	}
 
 	const handleEndRoute = () => {
 		setAllItems([]);
+		// switch to the Next tab after starting the route
 	}
 
 	
