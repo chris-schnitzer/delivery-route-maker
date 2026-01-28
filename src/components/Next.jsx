@@ -37,7 +37,7 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
 
 	return (
 		<div className="next-wrap">
-            <h1 className="list-text">Route</h1>
+            <h1 className="list-text">Delivery Route</h1>
             <p className="list-text">Drive from A-Z with eaze</p>
 			<ul className="route-ul-wrap">
                 {

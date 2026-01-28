@@ -36,6 +36,10 @@
 	margin-left: 20px;
 }
 
+.end-route {
+	margin-bottom: 50px;
+}
+
 .end-route:disabled {
   opacity: 0.4;
   cursor: not-allowed;
