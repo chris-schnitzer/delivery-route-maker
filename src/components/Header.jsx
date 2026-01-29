@@ -7,17 +7,19 @@ import { TiInfoLarge } from "react-icons/ti";
 import { MdHistory } from "react-icons/md";
 
 
-export default function Header() {
+export default function Header({setActiveTab}) {
 	return(
 		<header>
 			{/*<GiArmoredBoomerang className="primary-logo"/>*/}
 			<FaFlutter className="primary-logo"/>
 			<div className="top-nav">
 				<TiInfoLarge 
-					className="top-nav-icon info"  
+					className="top-nav-icon info"
+					onClick={() => setActiveTab("Info")} 
 				/>
 				<MdHistory 
 					className="top-nav-icon history"
+					onClick={() => setActiveTab("History")}
 				/>	
 			</div>
 		</header>

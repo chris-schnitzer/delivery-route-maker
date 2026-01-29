@@ -1,0 +1,10 @@
+
+.history-wrap {
+	width: 100%;
+	padding-top: 50px;
+	margin: 0;
+	background-color: white;
+	height: 100vh;
+	overflow: scroll;
+	padding-bottom: 60px;
+}

@@ -20,7 +20,7 @@ export default function MyApp() {
 
 	return(
 		<>	
-			<Header />	
+			<Header setActiveTab={setActiveTab} />	
 			<TabBar 
 				activeTab={activeTab}
 				setActiveTab={setActiveTab}

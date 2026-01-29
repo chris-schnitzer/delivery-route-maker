@@ -6,6 +6,8 @@ import List from './List';
 import AddForm from './AddForm';
 import Collectables from './Collectables';
 import Modal from './Modal.jsx';
+import History from './History';
+import Info from './Info';
 
 export default function TabContent({ activeTab, setCollectableItems, collectableItems, setActiveTab }) {
 	const [showLanding, setShowLanding] = useState(true);
@@ -139,7 +141,11 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
    		Collectables: <Collectables 
    			collectableItems={collectableItems} 
    			handleRemoveCollectable={handleRemoveCollectable}
-   		/>
+   		/>,
+
+   		Info: <Info />,
+
+   		History: <History />,
     	
     	
   	};
