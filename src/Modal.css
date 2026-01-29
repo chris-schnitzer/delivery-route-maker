@@ -66,5 +66,5 @@
 
 /* Danger confirm */
 .confirm-btn.danger {
-  background: #dc3545;
+  background: red;
 }
