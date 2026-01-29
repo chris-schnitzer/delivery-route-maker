@@ -5,9 +5,13 @@ import Next from './Next';
 import List from './List';
 import AddForm from './AddForm';
 import Collectables from './Collectables';
+import Modal from './Modal.jsx';
 
 export default function TabContent({ activeTab, setCollectableItems, collectableItems, setActiveTab }) {
 	const [showLanding, setShowLanding] = useState(true);
+	
+	// Modal state
+	const [showStartRouteAlert, setShowStartRouteAlert] = useState(false);
 
 	const handleEnterApp = () => {
 		setShowLanding(false);
@@ -53,10 +57,16 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	}
 
 	const handleStartRoute = () => {
+		// Block starting a new route if one is active
+  		if (Array.isArray(allItems) && allItems.length > 0) {
+    		setShowStartRouteAlert(true);
+    		return;
+  		}
+
+		// Start if no active route
 		setAllItems(items);
 		setItems([]);
-		// Switch to the Next tab immediately after starting the route
-    	if (typeof setActiveTab === "function") setActiveTab("Next");
+    	setActiveTab("Next");
 	}
 
 	const handleEndRoute = () => {
@@ -139,12 +149,22 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 
 			{showLanding ? (
 					<Landing onEnter={handleEnterApp} />
-				) : (
-					tabComponents[activeTab]
-				)
-				
-			}	
-		</>
+				) : (	
+						<>
+							{showStartRouteAlert && (
+								<Modal
+								open={showStartRouteAlert}
+								title="Route already in progress"
+								message="Please end the current route before starting a new one."
+								onClose={() => setShowStartRouteAlert(false)}
+								confirmText="OK"
+								/>
+							)}
+							  	
+							{tabComponents[activeTab]}
+						</>	
+				)}
+		</>	
 	)
 }
 

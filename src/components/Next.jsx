@@ -1,11 +1,14 @@
 // This is the current route(Next.jsx) component.
-
+import { useState } from "react";
 import vanData from "../vanData.js";
 import "../Next.css";
+import Modal from "./Modal";
 
 import check from "../assets/check.svg";
 
 export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
+    const [showEndRouteAlert, setShowEndRouteAlert] = useState(false);
+
 	// Create a map of vanNumber to position for fast lookup
 	const vanPositionMap = vanData.reduce((acc, { vanNumber, position }) => {
     	acc[vanNumber] = position;
@@ -24,18 +27,40 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
 
     const completeTask = (vanId) => {
         handleCompleteTask(vanId);
-    }
+    };
 
     // defensive wrapper so the button never triggers when disabled
     const handleEnd = () => {
         if (endDisabled) return;
-        handleEndRoute();
-    }
+        setShowEndRouteAlert(true);    
+    };
+
+    const confirmEndRoute = () => {
+        setShowEndRouteAlert(false);
+        handleEndRoute(); // clears allItems
+    };
+
+    const cancelEndRoute = () => {
+        setShowEndRouteAlert(false);
+    };
 
     // disable End Route when there are no vans/items
     const endDisabled = !(Array.isArray(sortedVans) && sortedVans.length > 0);
 
 	return (
+        <>
+        {showEndRouteAlert && (
+            <Modal
+                open={showEndRouteAlert}
+                title="End route?"
+                message="Ending the route will clear all remaining items."
+                onClose={cancelEndRoute}
+                onConfirm={confirmEndRoute}
+                confirmText="End Route"
+                cancelText="Cancel"
+                danger
+            />
+        )}
 		<div className="next-wrap">
             <h1 className="list-text">Delivery Route</h1>
             <p className="list-text">Drive from A-Z with eaze</p>
@@ -76,5 +101,6 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
                 End Route
             </button>
 		</div>
+        </>
 	)
 }
