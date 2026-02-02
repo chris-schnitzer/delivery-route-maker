@@ -24,6 +24,7 @@ header {
 	font-size: 22px;
 	align-items: center;
 	opacity: 0.7;
+	cursor: pointer;
 }
 
 .info
