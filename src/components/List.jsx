@@ -1,8 +1,5 @@
 import "../List.css";
 import { useState, useEffect } from "react";
-import { v4 as uuid } from 'uuid';
-
-import vanData from "../vanData.js";
 
 import close from "../assets/close.svg";
 import deleteIcon from "../assets/delete.svg";

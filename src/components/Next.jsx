@@ -1,5 +1,5 @@
 // This is the current route(Next.jsx) component.
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import vanData from "../vanData.js";
 import "../Next.css";
 import Modal from "./Modal";
@@ -16,14 +16,11 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
   	}, {});
 
   	// Sort vans based on the position from vanData
-  	const sortedVans = [...allItems].sort((a, b) => {
-    	const positionA = vanPositionMap[a.vanNo];
-    	const positionB = vanPositionMap[b.vanNo];
-
-    	return positionA - positionB; // Sort by position in ascending order
-  	});
-
-
+  	const sortedVans = useMemo(() => {
+        return[...allItems].sort((a, b) => {
+            return vanPositionMap[a.vanNo] - vanPositionMap[b.vanNo]; // Sort by position in ascending order
+        });
+    }, [allItems, vanPositionMap]);
 
     const completeTask = (vanId) => {
         handleCompleteTask(vanId);
