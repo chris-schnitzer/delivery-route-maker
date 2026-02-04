@@ -87,22 +87,35 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	        setHistory((prevHistory) => [
 	            {
 	                ...completedVan,
-	                completedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+	                completedAt: new Date().toLocaleTimeString([], { 
+	                	hour: '2-digit', 
+	                	minute: '2-digit' }),
 	            },
 	            ...prevHistory
 	        ]);
 
 	        // 4. Update Collectables
-	        const collectables = completedVan.items
-	            .filter((item) => ["box", "bx", "phvr", "ph", "phr", "pet hoover", "pethoover"].includes(item.value.toLowerCase()))
-	            .map((item) => ({ 
-	                ...item, 
-	                vanNo: completedVan.vanNo,
-	                timeAdded: new Date().toLocaleTimeString()
-	            }));
+	        const COLLECTABLE_KEYWORDS = new Set([
+	        	"box", 
+	        	"bx", 
+	        	"phvr", 
+	        	"ph", 
+	        	"phr", 
+	        	"pethoover", 
+	        ]);
+
+	       	const normalize = (str) => str.toLowerCase().replace(/\s+/g, "");
+
+	       	const collectables = completedVan.items
+	       		.filter(item => COLLECTABLE_KEYWORDS.has(normalize(item.value)))
+           		.map((item) => ({ 
+                ...item, 
+                vanNo: completedVan.vanNo,
+                timeAdded: new Date().toLocaleTimeString()
+            }));
 
 	        if (collectables.length > 0) {
-	            setCollectableItems((prev) => [...prev, ...collectables]);
+	            setCollectableItems(prev => [...prev, ...collectables]);
 	        }
 
 	        // 5. REMOVE the van from the active list
