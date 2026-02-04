@@ -48,14 +48,14 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	}
 
 	const removeItemHandler = (itemId) => {
-		console.log(items);
 		setItems((prevItems) => 
-			prevItems.map((i) => ({
-			...i,
-			items: i.items.filter((item) => item.itemId !== itemId),
+			prevItems.map((van) => ({
+			...van,
+			items: van.items.filter(item => item.itemId !== itemId),
 		}))
-		)
-	}
+		.filter(van => van.items.length > 0)
+		);
+	};
 
 	const handleStartRoute = () => {
 		// Block starting a new route if one is active
