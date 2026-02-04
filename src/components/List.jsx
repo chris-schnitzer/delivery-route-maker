@@ -43,7 +43,6 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 	}
 
 	const startRoute = () => {
-		if (!Array.isArray(items) || items.length === 0) return;
 		handleStartRoute();
 	}
 
