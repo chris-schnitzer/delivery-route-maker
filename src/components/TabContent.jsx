@@ -18,35 +18,24 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	const handleEnterApp = () => {
 		setShowLanding(false);
 	}
+
+	function useLocalStorageState(key, initialValue) {
+		const [state, setState] = useState(() => {
+			const saved = localStorage.getItem(key);
+			return saved ? JSON.parse(saved) : initialValue;
+		});
 	
-	const [items, setItems] = useState(() => {
-		const saved = localStorage.getItem("items");
-		return saved ? JSON.parse(saved) : [];
-	});
+		useEffect(() => {
+			localStorage.setItem(key, JSON.stringify(state));
+		}, [key, state]);
 
-	const [allItems, setAllItems] = useState(() => {
-		const saved = localStorage.getItem("allItems");
-		return saved ? JSON.parse(saved) : [];
-	});
+		return [state, setState];
+	}
 
-	const [history, setHistory] = useState(() => {
-    	const saved = localStorage.getItem("history");
-    	return saved ? JSON.parse(saved) : [];
-	});
-
-	useEffect(() => {
-		localStorage.setItem("items", JSON.stringify(items));
-	}, [items]);
-
-	useEffect(() => {
-		localStorage.setItem("allItems", JSON.stringify(allItems));
-	}, [allItems]);
-
-	useEffect(() => {
-    	localStorage.setItem("history", JSON.stringify(history));
-	}, [history]);
-
-
+	const [items, setItems] = useLocalStorageState("items", []);
+	const [allItems, setAllItems] = useLocalStorageState("allItems", []);
+	const [history, setHistory] = useLocalStorageState("history", []);
+	
 	const handleFormData = (formData) => {
 		setItems((prevItems) => [
 			...prevItems, 
