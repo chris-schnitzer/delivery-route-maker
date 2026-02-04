@@ -29,6 +29,11 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 		return saved ? JSON.parse(saved) : [];
 	});
 
+	const [history, setHistory] = useState(() => {
+    	const saved = localStorage.getItem("history");
+    	return saved ? JSON.parse(saved) : [];
+	});
+
 	useEffect(() => {
 		localStorage.setItem("items", JSON.stringify(items));
 	}, [items]);
@@ -36,6 +41,11 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	useEffect(() => {
 		localStorage.setItem("allItems", JSON.stringify(allItems));
 	}, [allItems]);
+
+	useEffect(() => {
+    	localStorage.setItem("history", JSON.stringify(history));
+	}, [history]);
+
 
 	const handleFormData = (formData) => {
 		setItems((prevItems) => [
@@ -73,46 +83,42 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 
 	const handleEndRoute = () => {
 		setAllItems([]);
-		// switch to the Next tab after starting the route
 	}
 
 	
 
 	const handleCompleteTask = (vanId) => {
-		setAllItems((prevVans) => {
-			return prevVans.filter((van) => {
-				if (van.vanId === vanId) {
-					// Get collectable items (e.g., "box" or "phvr") and add vanNo to each
-					const collectables = van.items
-						.filter((item) => ["box", "bx", "phvr", "ph", "phr", "pet hoover", "pethoover"].includes(item.value.toLowerCase()))
-						.map((item) => ({ 
-							...item, 
-							vanNo: van.vanNo,
-							timeAdded: new Date().toLocaleTimeString([], { 
-								hour: '2-digit', 
-								minute: '2-digit',
-								second: '2-digit' 
-							}),  
-						}));
+	    // 1. Find the van in the current state
+	    const completedVan = allItems.find(v => v.vanId === vanId);
 
-					if (collectables.length > 0) {
-						// Avoid duplicates: only add new items not already in collectableItems
-						setCollectableItems((prev) => {
-							const newItems = collectables.filter(
-								(item) => !prev.some((existing) => existing.itemId === item.itemId)
-							);
-							return [...prev, ...newItems];
-						});
-					}
+	    // 2. Safety check: only proceed if the van exists
+	    if (completedVan) {
+	        
+	        // 3. Update History
+	        setHistory((prevHistory) => [
+	            {
+	                ...completedVan,
+	                completedAt: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+	            },
+	            ...prevHistory
+	        ]);
 
-					// Always remove the van after completing the task
-					return false;
-				}
+	        // 4. Update Collectables
+	        const collectables = completedVan.items
+	            .filter((item) => ["box", "bx", "phvr", "ph", "phr", "pet hoover", "pethoover"].includes(item.value.toLowerCase()))
+	            .map((item) => ({ 
+	                ...item, 
+	                vanNo: completedVan.vanNo,
+	                timeAdded: new Date().toLocaleTimeString()
+	            }));
 
-				// Keep all other vans
-				return true;
-			});
-		});
+	        if (collectables.length > 0) {
+	            setCollectableItems((prev) => [...prev, ...collectables]);
+	        }
+
+	        // 5. REMOVE the van from the active list
+	        setAllItems((prevVans) => prevVans.filter((van) => van.vanId !== vanId));
+	    }
 	};
 
 	const handleRemoveCollectable = (itemId) => {
@@ -145,7 +151,10 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 
    		Info: <Info />,
 
-   		History: <History />,
+   		History: <History 
+   			history={history}
+   			setHistory={setHistory}
+   		/>,
     	
     	
   	};
