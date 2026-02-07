@@ -50,7 +50,7 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 	const startDisabled = !(Array.isArray(items) && items.length > 0);
 
 	return (
-		<div id="list-wrap">
+		<div className="list-wrap">
 			<h1 className="list-text">Inventory List</h1>
 			<p className="list-text">Load items, check off and start route when ready to hit the road.</p>	
 			<ul className="ul-list-wrap">

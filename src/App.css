@@ -28,6 +28,7 @@ h1, h2, h3 {
   color: transparent; 
 }
 
+
 a, button, .tab-button, .add-new-icon {
   cursor: pointer;
 }
@@ -52,4 +53,10 @@ button {
 .warning {
   color: red;
   text-align: center;
+}
+
+.time {
+  font-style: italic;
+  color: #6b7280;
+  font-size: 0.9em;
 }

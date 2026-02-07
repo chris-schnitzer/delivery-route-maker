@@ -74,8 +74,6 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 		setAllItems([]);
 	}
 
-	
-
 	const handleCompleteTask = (vanId) => {
 	    // 1. Find the van in the current state
 	    const completedVan = allItems.find(v => v.vanId === vanId);
