@@ -89,9 +89,11 @@ li {
 
 .start-route {
 	width: 150px;
+	position: fixed;
+	bottom: 65px;
+	left: 50%;
 	text-align: center;
-	margin: 45px auto 50px auto;
-	display: block;
+	transform: translateX(-50%);
 }
 
 .start-route:disabled {

@@ -37,7 +37,11 @@
 }
 
 .end-route {
-	margin-bottom: 50px;
+	width: 150px;
+	position: fixed;
+	bottom: 65px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 .end-route:disabled {

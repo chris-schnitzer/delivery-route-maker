@@ -53,55 +53,64 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 		<div className="list-wrap">
 			<h1 className="list-text">Inventory List</h1>
 			<p className="list-text">Load items, check off and start route when ready to hit the road.</p>	
-			<ul className="ul-list-wrap">
-				{ 
-					items.length > 0 ? (
-						items.map((van) => {
+				
+			{items.length === 0 ? ( 
+				<p className="warning">No vans or items available</p> 
+			) : (
+				<>
+					<ul className="ul-list-wrap">
+						{items.map((van) => {
 							return (
 								<li className="list-items" key={van.vanId}>
 									<div className="van-head">
 										<h1 className="van-no">{van.vanNo}</h1>
-										<img className="pointer" src={close} alt="Delete van" onClick={() => removeVan(van.vanId)} />
+										<img 
+											className="pointer" 
+											src={close} 
+											alt="Delete van" 
+											onClick={() => removeVan(van.vanId)} 
+										/>
 									</div>	
-									
-									
 									<ul>
 										{van.items.map((item) => {
-											return <li 
-														key={item.itemId}
-														className="individual-item-wrap"
-													>
-														<div className="item-with-checkbox">
-															<div 
-																onClick ={() => handleToggle(item.itemId)}
-																className="checkbox" 
-																style={{backgroundColor: checkedItems[item.itemId] ? "#80D0C7" : "#d9d9d9"}}
-															>
-															</div>
-															{item.value}
+											return ( 
+												<li 
+													key={item.itemId}
+													className="individual-item-wrap"
+												>
+													<div className="item-with-checkbox">
+														<div 
+															onClick ={() => handleToggle(item.itemId)}
+															className="checkbox" 
+															style={{backgroundColor: checkedItems[item.itemId] ? "#80D0C7" : "#d9d9d9"}}
+														>
 														</div>
-														
-														<img  className="pointer" src={deleteIcon} onClick = {() => removeItem(item.itemId)} />	
-													</li>
-
+														{item.value}
+													</div>		
+													<img  
+														className="pointer" 
+														src={deleteIcon} 
+														onClick = {() => removeItem(item.itemId)} 
+													/>	
+												</li>
+											);
 										})}
 									</ul>
 								</li>
-							)
-						})
-						) : (
-							<p className="warning">No vans or items available</p>
-						)
-				}
-			</ul>
-			<button 
-				className="start-route" 
-				onClick={startRoute}
-				disabled={startDisabled}
-				aria-disabled={startDisabled}
-			>
-				Start route
-			</button> 
+							);
+						})}
+					</ul>
+					<button 
+						className="start-route" 
+						onClick={startRoute}
+						disabled={startDisabled}
+						aria-disabled={startDisabled}
+					>
+						Start route
+					</button>
+				</>
+				)}
+			
 		</div>
 	)
 }
