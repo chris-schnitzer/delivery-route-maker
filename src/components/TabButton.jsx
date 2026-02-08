@@ -5,8 +5,7 @@ export default function TabButton({tabName, onSelect, icon, description, isActiv
 		onSelect(tabName);
 	}
 
-	const activeStyles = isActive 
-		&& "active";
+	const activeStyles = isActive ? "active" : "";
 
 	return(
 		<div onClick={handleClick} className={`tab-button ${activeStyles}`}>
