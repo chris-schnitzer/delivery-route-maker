@@ -96,9 +96,4 @@ li {
 	transform: translateX(-50%);
 }
 
-.start-route:disabled {
-	opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none; /* optional since disabled already prevents click */
-}
 

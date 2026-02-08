@@ -103,8 +103,6 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 					<button 
 						className="start-route" 
 						onClick={startRoute}
-						disabled={startDisabled}
-						aria-disabled={startDisabled}
 					>
 						Start route
 					</button>

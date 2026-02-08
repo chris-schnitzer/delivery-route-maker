@@ -93,14 +93,12 @@ export default function Next({ allItems, handleEndRoute, handleCompleteTask }) {
                     <button 
                         className="end-route" 
                         onClick={handleEnd}
-                        disabled={endDisabled}
-                        aria-disabled={endDisabled}
                     >
                         End Route
                     </button>
                     </>
                 ) : (
-                    <p className="warning next-warning">No vans or items available</p>
+                    <p className="warning next-warning">No delivery route available yet</p>
                 )
             };
 
