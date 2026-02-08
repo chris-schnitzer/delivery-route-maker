@@ -4,20 +4,37 @@ import close from "../assets/close.svg"
 
 
 export default function History({ history, setHistory }) {
+	const handleClearAllHistory = () => {
+		setHistory([]);
+	}
+
+	const handleClearHistoryItem = (index) => {
+		setHistory(prev => 
+			prev.filter((_, i) => i !== index)
+		);
+	};
+
 	return(
 		<div className="history-wrap">
 			<h1>History</h1>
-			<button className="clear-all-history">Clear</button>
 			{history.length === 0 ? (
-				<p>No history to show</p>
+				<>
+				<p className="warning">No history to show</p>
+				
+				</>
 			) : (
+				<>
 				<ul className="ul-history-wrap">
 
 					{history.map((entry, index) => (
 						<li key={`${entry.vanId}-${index}`} className="history-item">
 							<div className="history-head-row">
 								<h2 className="h2-no">{entry.vanNo}</h2>
-								<img className="history-close-button" src={close} alt="delete button"/>
+								<img
+									onClick={() => handleClearHistoryItem(index)}
+									className="history-close-button" 
+									src={close} alt="delete button"
+								/>
 							</div>
 							<div className="history-contents-row">
 								<ul className="history-sub-items">
@@ -32,6 +49,8 @@ export default function History({ history, setHistory }) {
 
 					))}
 				</ul>
+				<button onClick={handleClearAllHistory} className="clear-all-history">Clear All History</button>
+				</>
 			)}
 		</div>
 	)

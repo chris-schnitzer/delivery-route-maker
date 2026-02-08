@@ -51,7 +51,10 @@ button {
 
 
 .warning {
-  color: red;
+/*  color: red;*/
+  color: color: #6b7280;
+  opacity: 0.3;
+  font-weight: bold;
   text-align: center;
 }
 
