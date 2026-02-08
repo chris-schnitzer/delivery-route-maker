@@ -27,6 +27,10 @@ header {
 	cursor: pointer;
 }
 
+.top-nav-icon.active {
+	color: #14abde;
+}
+
 .info
  {
  	margin-right: 25px;
