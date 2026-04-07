@@ -8,6 +8,7 @@
 }
 
 .tab-button {
+	position: relative;
 	font-size: 20px;
 	margin-top: 5px;
 	color: #8b8b8b;
@@ -23,4 +24,17 @@ span.tab-alert {
 	height: 10px;
 	border-radius: 10px;
 	background-color: red;
+}
+
+span.tab-counter {
+
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	right: 17px;
+	top: 17px;
+	z-index: 999;
+	color: #0093E9;
+	font-weight: bold;
+	font-size: 14px;
 }

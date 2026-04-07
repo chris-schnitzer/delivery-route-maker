@@ -9,7 +9,7 @@ import Modal from './Modal.jsx';
 import History from './History';
 import Info from './Info';
 
-export default function TabContent({ activeTab, setCollectableItems, collectableItems, setActiveTab }) {
+export default function TabContent({ activeTab, setCollectableItems, collectableItems, setActiveTab, setVanCounter }) {
 	const [showLanding, setShowLanding] = useState(true);
 	
 	// Modal state
@@ -35,6 +35,10 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 	const [items, setItems] = useLocalStorageState("items", []);
 	const [allItems, setAllItems] = useLocalStorageState("allItems", []);
 	const [history, setHistory] = useLocalStorageState("history", []);
+
+	useEffect(() => {
+  		setVanCounter(items.length);
+	}, [items]);
 	
 	const handleFormData = (formData) => {
 		setItems((prevItems) => [
@@ -125,8 +129,8 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
 		setCollectableItems((prevVan) => prevVan.filter((item) => item.itemId !== itemId));
 	}
 
-	
-
+	const vanCounter = items.length;
+	console.log(vanCounter);
 	const tabComponents = {
 		Add: <AddForm passFormData={handleFormData} />,
 
@@ -135,7 +139,6 @@ export default function TabContent({ activeTab, setCollectableItems, collectable
     				removeVanHandler={removeVanHandler}
     				removeItemHandler={removeItemHandler}
     				handleStartRoute={handleStartRoute}
-
     	/>,
 
    		Next: <Next 

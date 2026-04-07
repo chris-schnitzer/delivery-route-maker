@@ -5,6 +5,7 @@ import Header from "../components/Header.jsx";
 
 export default function MyApp() {
 	const [activeTab, setActiveTab] = useState("Add");
+	const [vanCounter, setVanCounter] = useState(0);
 
 	const [collectableItems, setCollectableItems] = useState(() => {
     const saved = localStorage.getItem("collectables");
@@ -28,6 +29,8 @@ export default function MyApp() {
 				setActiveTab={setActiveTab}
 				collectableItems={collectableItems}
 				setCollectableItems={setCollectableItems}
+				vanCounter={vanCounter}
+				setVanCounter={setVanCounter}
 			/>
 		</>
 	)

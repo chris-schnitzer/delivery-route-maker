@@ -46,8 +46,7 @@ export default function List({items, removeVanHandler, removeItemHandler, handle
 		handleStartRoute();
 	}
 
-	// disabled when items array is empty or not an array
-	const startDisabled = !(Array.isArray(items) && items.length > 0);
+
 
 	return (
 		<div className="list-wrap">

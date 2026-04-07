@@ -5,7 +5,7 @@ import TabContent from "../components/TabContent.jsx";
 import { FaPlus, FaList, FaLocationDot, FaBusinessTime  } from "react-icons/fa6";
 
 
-export default function TabBar({ activeTab, setActiveTab, collectableItems, setCollectableItems }) {
+export default function TabBar({ activeTab, setActiveTab, collectableItems, setCollectableItems, vanCounter, setVanCounter}) {
 	
 	const handleClick = (tabName) => {
 		setActiveTab(tabName);
@@ -27,7 +27,8 @@ export default function TabBar({ activeTab, setActiveTab, collectableItems, setC
 				tabName="MyList"
 				icon={<FaList/>}
 				description="List Icon"
-				isActive={activeTab === "MyList"} 
+				isActive={activeTab === "MyList"}
+				vanCounter={vanCounter} 
 			/>
 
 			<TabButton 
@@ -53,6 +54,7 @@ export default function TabBar({ activeTab, setActiveTab, collectableItems, setC
 				setActiveTab={setActiveTab} 
 				setCollectableItems={setCollectableItems}
 				collectableItems={collectableItems}
+				setVanCounter={setVanCounter}
 			/>
 		</div>	
 		</>
